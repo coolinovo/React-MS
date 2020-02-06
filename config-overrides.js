@@ -3,19 +3,23 @@
  * 还需要修改 package.json 的 scripts 选项
  * 从 customize-cra 引入相关的方法
 */
+
 const {
   override,
   fixBabelImports,
   addLessLoader
 } = require('customize-cra')
 
+const theme = require('./theme')
+
 module.exports = override(
   fixBabelImports('import', {
     libraryName: 'antd',
     libraryDirectory: 'es',
-    style: 'css'
+    style: true
   }),
   addLessLoader({
-    javascriptEnabled: true
+    javascriptEnabled: true,
+    modifyVars: theme
   })
 )
