@@ -8,7 +8,7 @@ import {
 } from '../views'
 
 // 和 App 同级的路由
-export const mainRouter = [{
+export const mainRoute = [{
   pathname: '/login',
   component: Login
 },{
@@ -17,17 +17,28 @@ export const mainRouter = [{
 }]
 
 // App 子路由
-export const adminRouter = [{
+export const adminRoute = [{
   pathname: '/admin/dashboard',
-  component: DashBoard
-},{
-  pathname: '/admin/settings',
-  component: Settings
+  component: DashBoard,
+  title: '仪表盘',
+  icon: 'dashboard',
+  isNav: true
 },{
   pathname: '/admin/list',
   component: List,
-  exact: true
+  exact: true,
+  title: '文章列表',
+  icon: 'unordered-list',
+  isNav: true
 },{
   pathname: '/admin/list/edit/:id',
-  component: Edit
+  component: Edit,
+  title: '编辑',
+  icon: 'edit'
+},{
+  pathname: '/admin/settings',
+  component: Settings,
+  title: '设置',
+  icon: 'setting',
+  isNav: true
 }]

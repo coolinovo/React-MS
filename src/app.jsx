@@ -5,18 +5,18 @@ import {
   Redirect
 } from 'react-router-dom'
 
-import {
-  adminRouter
-} from "./routes";
+import { adminRoute } from "./routes"
+import { Frame } from "./component/"
+
+const menus = adminRoute.filter(route => route.isNav === true)
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <div>public</div>
+      <Frame menus={menus}>
         <Switch>
           {
-            adminRouter.map(route =>
+            adminRoute.map(route =>
               <Route
                 key={route.pathname}
                 path={route.pathname}
@@ -24,10 +24,10 @@ class App extends Component {
                 render={(routerProps) => <route.component {...routerProps}/>}
               />)
           }
-          <Redirect to={adminRouter[0].pathname} from='/admin' exact/>
+          <Redirect to={adminRoute[0].pathname} from='/admin' exact/>
           <Redirect to='/404' exact/>
         </Switch>
-      </div>
+      </Frame>
     )
   }
 }

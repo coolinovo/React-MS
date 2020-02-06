@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom'
 import App from './app'
 
-import {mainRouter} from "./routes"
+import { mainRoute } from "./routes"
 
 import './index.less'
 
@@ -22,7 +22,7 @@ render(
         return <App {...routerProps}/>
       }}/>
       {
-        mainRouter.map(route => <Route
+        mainRoute.map(route => <Route
           key={route.pathname}
           path={route.pathname}
           component={route.component}
