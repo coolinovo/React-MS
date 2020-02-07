@@ -45,6 +45,10 @@ const Settings = Loadable({
   loader: () => import('./settings'),
   loading: Loading
 })
+const Notice = Loadable({
+  loader: () => import('./notifications'),
+  loading: Loading()
+})
 
 export {
   Login,
@@ -52,5 +56,6 @@ export {
   NotFound,
   List,
   Edit,
-  Settings
+  Settings,
+  Notice
 }

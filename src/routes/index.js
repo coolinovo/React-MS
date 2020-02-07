@@ -4,7 +4,8 @@ import {
   NotFound,
   List,
   Edit,
-  Settings
+  Settings,
+  Notice
 } from '../views'
 
 // 和 App 同级的路由
@@ -41,4 +42,8 @@ export const adminRoute = [{
   title: '设置',
   icon: 'setting',
   isNav: true
+},{
+  pathname: '/admin/notice',
+  component: Notice,
+  title: '通知中心'
 }]

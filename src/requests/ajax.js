@@ -59,3 +59,8 @@ export const updateArticle = (id, info) => {
     ...info
   })
 }
+
+// 获取浏览量
+export const getAmount = () => {
+  return service.post('/api/v1/articleList/amount')
+}
