@@ -6,7 +6,8 @@ import {
   Edit,
   Settings,
   Notice,
-  NoAuth
+  NoAuth,
+  Profile
 } from '../views'
 
 // 和 App 同级的路由
@@ -54,5 +55,9 @@ export const adminRoute = [{
 },{
   pathname: '/admin/noauth',
   component: NoAuth,
+  roles: ['001', '002', '003']
+},{
+  pathname: '/admin/profile',
+  component: Profile,
   roles: ['001', '002', '003']
 }]

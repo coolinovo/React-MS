@@ -34,6 +34,11 @@ export default (state = initUserInfo, action) => {
         isLoading: false,
         role: ''
       }
+    case actionTypes.CHANGE_AVATAR:
+      return {
+        ...state,
+        avatar: action.payload.avatarUrl
+      }
     default:
       console.log(action)
       return state

@@ -80,6 +80,8 @@ export default class List extends Component {
       // 获取对象的属性数组
       const keys = Object.keys(res.list[0])
       const columns = this.createCol(keys)
+      console.log(this.updater.isMounted(this))
+      if (!this.updater.isMounted(this)) return
       // 更新状态
       // columns 格式必须要一样
       this.setState({
@@ -90,6 +92,7 @@ export default class List extends Component {
     } catch (err) {
       // 错误处理
     } finally {
+      if (!this.updater.isMounted(this)) return
       this.setState({
         isLoading: false
       })
@@ -135,6 +138,7 @@ export default class List extends Component {
     XLSX.writeFile(wb, `文章列表-${this.state.offset/this.state.limited+1}-${moment().format('YYYYMMDDHHmmss')}.xlsx`)
   }
   componentDidMount() {
+    console.log(this.updater.isMounted(this))
     this.getData()
   }
   // 删除操作

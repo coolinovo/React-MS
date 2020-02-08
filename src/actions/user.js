@@ -55,3 +55,12 @@ export const toLogin = (userInfoo) => {
     }
   }
 }
+
+export const changeAvatar = (avatarUrl) => {
+  return {
+    type: actionTypes.CHANGE_AVATAR,
+    payload: {
+      avatarUrl
+    }
+  }
+}
