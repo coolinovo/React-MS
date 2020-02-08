@@ -37,13 +37,12 @@ export const adminRoute = [{
   title: '编辑',
   icon: 'edit'
 },{
+  pathname: '/admin/notice',
+  component: Notice
+},{
   pathname: '/admin/settings',
   component: Settings,
   title: '设置',
   icon: 'setting',
   isNav: true
-},{
-  pathname: '/admin/notice',
-  component: Notice,
-  title: '通知中心'
 }]

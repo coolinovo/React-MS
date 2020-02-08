@@ -47,7 +47,7 @@ const Settings = Loadable({
 })
 const Notice = Loadable({
   loader: () => import('./notifications'),
-  loading: Loading()
+  loading: Loading
 })
 
 export {

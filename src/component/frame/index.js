@@ -1,23 +1,35 @@
 import React, {Component} from "react"
 import { Layout, Menu, Icon, Dropdown, Avatar, Badge } from 'antd'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import logo from './logo.png'
 import './frame.less'
 
 const { Header, Content, Sider } = Layout
+const mapState = state => {
+  return {
+    noticeCount: state.notice.list.filter(item => item.hasRead === false).length
+  }
+}
 
+@connect(mapState)
 @withRouter
 class Frame extends Component {
+  componentDidMount() {
+    console.log(this.props)
+  }
+
   menuClick = ({ key }) => {
     this.props.history.push(key)
   }
   dropDown = ({ key }) => {
     this.props.history.push(key)
   }
-  menu = (
+  // 下拉菜单
+  renderDrop = () => (
     <Menu onClick={this.dropDown}>
       <Menu.Item key='/admin/notice'>
-        <Badge dot>通知中心</Badge>
+        <Badge dot={this.props.noticeCount !==0 ?true:false}>通知中心</Badge>
       </Menu.Item>
       <Menu.Item key='/admin/settings'>
         个人设置
@@ -38,11 +50,11 @@ class Frame extends Component {
             <img src={logo} alt="coolin"/>
           </div>
           <div>
-            <Dropdown overlay={this.menu}>
+            <Dropdown overlay={this.renderDrop}>
               <div className='lin-link'>
                 <span>欢迎你!</span>
                 <Avatar src=''/>
-                <Badge count={10} offset={[-7, -10]}>
+                <Badge count={this.props.noticeCount} offset={[-7, -10]}>
                   <Icon type='down'/>
                 </Badge>
               </div>
