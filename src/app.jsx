@@ -15,7 +15,8 @@ import { Frame } from "./component/"
 const menus = adminRoute.filter(route => route.isNav === true)
 
 const mapState = state => ({
-  isLogin: state.userInfo.isLogin
+  isLogin: state.userInfo.isLogin,
+  role: state.userInfo.role
 })
 
 @connect(mapState)
@@ -33,7 +34,9 @@ class App extends Component {
                     key={route.pathname}
                     path={route.pathname}
                     exact={route.exact}
-                    render={(routerProps) => <route.component {...routerProps}/>}
+                    render={(routerProps) => {
+                      const hasPermission = route.roles.includes(this.props.role)
+                      return hasPermission?<route.component {...routerProps}/> : <Redirect to='/admin/noauth'/>}}
                   />)
               }
               <Redirect to={adminRoute[0].pathname} from='/admin' exact/>

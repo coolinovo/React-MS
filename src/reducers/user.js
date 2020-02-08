@@ -31,7 +31,8 @@ export default (state = initUserInfo, action) => {
         displayName: '',
         avatar: '',
         isLogin: false,
-        isLoading: false
+        isLoading: false,
+        role: ''
       }
     default:
       console.log(action)

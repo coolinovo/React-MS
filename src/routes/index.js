@@ -24,29 +24,35 @@ export const adminRoute = [{
   component: DashBoard,
   title: '仪表盘',
   icon: 'dashboard',
-  isNav: true
+  isNav: true,
+  roles: ['001', '002', '003']
 },{
   pathname: '/admin/list',
   component: List,
   exact: true,
   title: '文章列表',
   icon: 'unordered-list',
-  isNav: true
+  isNav: true,
+  roles: ['001', '002']
 },{
   pathname: '/admin/list/edit/:id',
   component: Edit,
   title: '编辑',
-  icon: 'edit'
+  icon: 'edit',
+  roles: ['001']
 },{
   pathname: '/admin/notice',
-  component: Notice
+  component: Notice,
+  roles: ['001', '002', '003']
 },{
   pathname: '/admin/settings',
   component: Settings,
   title: '设置',
   icon: 'setting',
-  isNav: true
+  isNav: true,
+  roles: ['001']
 },{
   pathname: '/admin/noauth',
-  component: NoAuth
+  component: NoAuth,
+  roles: ['001', '002', '003']
 }]
