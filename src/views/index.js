@@ -49,6 +49,10 @@ const Notice = Loadable({
   loader: () => import('./notifications'),
   loading: Loading
 })
+const NoAuth = Loadable({
+  loader: () => import('./noAuth'),
+  loading: Loading
+})
 
 export {
   Login,
@@ -57,5 +61,6 @@ export {
   List,
   Edit,
   Settings,
-  Notice
+  Notice,
+  NoAuth
 }

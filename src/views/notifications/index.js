@@ -1,21 +1,20 @@
 import React, { Component } from 'react'
-import {Card, Button, List, Avatar, Badge} from 'antd'
+import {Card, Button, List, Avatar, Badge, Spin} from 'antd'
 import { connect } from 'react-redux'
 
 import { markNotice, markAllNotice } from '../../actions/notice'
 
+// 把状态解构，通过 connect 注入挂载到 props
 const mapState = state => {
-  const { list } = state.notice
+  const { list, isLoading } = state.notice
   return {
-    list
+    list,
+    isLoading
   }
 }
 
 @connect(mapState, { markNotice, markAllNotice })
 class Notice extends Component {
-  componentDidMount() {
-    console.log(this.props)
-  }
   // 全部按扭
   markAll = () => {
     this.props.markAllNotice()
@@ -41,22 +40,24 @@ class Notice extends Component {
             >
               全部标记为已读
           </Button>}>
-          <List itemLayout='horizontal' dataSource={this.props.list} renderItem={item => (
-            <List.Item extra={
-              <Badge dot={!item.hasRead}>
-                <Button
-                  disabled={item.hasRead}
-                  onClick={this.markSingle.bind(this, item.id)}>
-                  {item.hasRead?'已读':'未读'}
-                </Button>
-              </Badge>}>
-              <List.Item.Meta
-                avatar={<Avatar src=''/>}
-                title={<span>{item.title}</span>}
-                description={item.desc}
-              />
-            </List.Item>
-          )}/>
+          <Spin spinning={this.props.isLoading}>
+            <List itemLayout='horizontal' dataSource={this.props.list} renderItem={item => (
+              <List.Item extra={
+                <Badge dot={!item.hasRead}>
+                  <Button
+                    disabled={item.hasRead}
+                    onClick={this.markSingle.bind(this, item.id)}>
+                    {item.hasRead?'已读':'未读'}
+                  </Button>
+                </Badge>}>
+                <List.Item.Meta
+                  avatar={<Avatar src=''/>}
+                  title={<span>{item.title}</span>}
+                  description={item.desc}
+                />
+              </List.Item>
+            )}/>
+          </Spin>
         </Card>
       </div>
     )

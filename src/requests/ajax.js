@@ -8,6 +8,10 @@ const service = axios.create({
   baseURL: isDev ? 'http://rap2api.taobao.org/app/mock/243833' : ''
 })
 
+const serviceLogin = axios.create({
+  baseURL: isDev ? 'http://rap2api.taobao.org/app/mock/243833' : ''
+})
+
 // -----------------拦截器----------------------------
 
 service.interceptors.request.use((config) => {
@@ -21,7 +25,6 @@ service.interceptors.request.use((config) => {
 })
 
 service.interceptors.response.use((response) => {
-  console.log(response)
   if (response.data.status === 200) {
     return response.data.data
   } else {
@@ -30,6 +33,11 @@ service.interceptors.response.use((response) => {
     message.error(response.data.msg, 1)
   }
 })
+
+// 登录
+export const login = (userInfo) => {
+  return serviceLogin.post('/api/v1/users/login', userInfo)
+}
 
 // 获取文章列表
 export const getArticles = (offset = 0, limited = 10) => {
@@ -63,4 +71,9 @@ export const updateArticle = (id, info) => {
 // 获取浏览量
 export const getAmount = () => {
   return service.post('/api/v1/articleList/amount')
+}
+
+// 通知中心
+export const getNotice = () => {
+  return service.post('/api/v1/notice')
 }

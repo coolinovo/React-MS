@@ -5,7 +5,8 @@ import {
   List,
   Edit,
   Settings,
-  Notice
+  Notice,
+  NoAuth
 } from '../views'
 
 // 和 App 同级的路由
@@ -45,4 +46,7 @@ export const adminRoute = [{
   title: '设置',
   icon: 'setting',
   isNav: true
+},{
+  pathname: '/admin/noauth',
+  component: NoAuth
 }]

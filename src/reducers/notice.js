@@ -23,6 +23,23 @@ const initState = {
 // 单个已读
 export default ( state = initState, action ) => {
   switch (action.type) {
+    // 请求通知列表
+    case actionTypes.POST_NOTICE_REQ:
+      return {
+        ...state,
+        list: action.payload.list
+      }
+    // loading 样式
+    case actionTypes.START_MARK:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case actionTypes.FINISH_MARK:
+      return {
+        ...state,
+        isLoading: false
+      }
     // 单个已读
     case actionTypes.MARK_NOTICE:
       const list = state.list.map(item => {

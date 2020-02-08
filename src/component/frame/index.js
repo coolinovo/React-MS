@@ -2,28 +2,35 @@ import React, {Component} from "react"
 import { Layout, Menu, Icon, Dropdown, Avatar, Badge } from 'antd'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { getAllNotice } from '../../actions/notice'
+import { logout } from '../../actions/user'
 import logo from './logo.png'
 import './frame.less'
 
 const { Header, Content, Sider } = Layout
 const mapState = state => {
   return {
-    noticeCount: state.notice.list.filter(item => item.hasRead === false).length
+    noticeCount: state.notice.list.filter(item => item.hasRead === false).length,
+    avatar: state.userInfo.avatar,
+    displayName: state.userInfo.displayName
   }
 }
 
-@connect(mapState)
+@connect(mapState, {getAllNotice, logout})
 @withRouter
 class Frame extends Component {
   componentDidMount() {
-    console.log(this.props)
+    this.props.getAllNotice()
   }
-
   menuClick = ({ key }) => {
     this.props.history.push(key)
   }
   dropDown = ({ key }) => {
-    this.props.history.push(key)
+    if (key === '/logout') {
+      this.props.logout()
+    } else {
+      this.props.history.push(key)
+    }
   }
   // 下拉菜单
   renderDrop = () => (
@@ -34,7 +41,7 @@ class Frame extends Component {
       <Menu.Item key='/admin/settings'>
         个人设置
       </Menu.Item>
-      <Menu.Item key='/login'>
+      <Menu.Item key='/logout'>
         退出
       </Menu.Item>
     </Menu>
@@ -52,8 +59,8 @@ class Frame extends Component {
           <div>
             <Dropdown overlay={this.renderDrop}>
               <div className='lin-link'>
-                <span>欢迎你!</span>
-                <Avatar src=''/>
+                <span>欢迎你! {this.props.displayName} </span>
+                <Avatar src={this.props.avatar}/>
                 <Badge count={this.props.noticeCount} offset={[-7, -10]}>
                   <Icon type='down'/>
                 </Badge>

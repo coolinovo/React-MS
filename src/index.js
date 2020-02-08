@@ -21,10 +21,8 @@ render(
       <Switch>
         <Route
           path='/admin'
-          render={(routerProps) => {
-            // 登录才能访问 admin
-            return <App {...routerProps}/>
-          }}/>
+          component={App}
+        />
         {
           mainRoute.map(route => <Route
             key={route.pathname}
